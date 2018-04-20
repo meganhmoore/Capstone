@@ -32,7 +32,11 @@ def parse_urls():
                 compString = "Access Denied"
                 try:
                     r = session.get(temp, headers={'Host':headers},timeout = 1) #allow_redirects = False,
-                    #r=requests.get(temp, timeout=1)
+                    if((r.text[20:(20+len(compString))]) == compString):
+                        print("Not Allowed!")
+                    else:
+                        # print("Success"+row[0]+host)
+                        print(r)#r=requests.get(temp, timeout=1)
 
                 except requests.exceptions.Timeout as e:
                     print("Timeout Error")
@@ -41,12 +45,7 @@ def parse_urls():
                     print("Connection Error")
                         #break
 
-                if((r.text[20:(20+len(compString))]) == compString):
-                    print("Not Allowed!")
 
-                else:
-                    # print("Success"+row[0]+host)
-                    print(r)
 
 
 
